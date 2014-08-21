@@ -186,10 +186,8 @@ Raphael.colorwheel = function(target, color_wheel_size, no_segments){
 
 
   function set_hue(color){
-    var rgb = Raphael.getRGB(color);
-    bs_square.h.attr("fill", rgb.hex);
-    var rgbstr = Raphael.format("rgba({0},{1},{2},", rgb.r, rgb.g, rgb.b);
-    alpha_rect.a.attr("fill", "180-"+rgbstr+"255)-"+rgbstr+"0)");
+    var hex = Raphael.getRGB(color).hex;
+    bs_square.h.attr("fill", hex);
   }
 
   function hue(){
@@ -229,6 +227,9 @@ Raphael.colorwheel = function(target, color_wheel_size, no_segments){
 
     current_color = Raphael.hsb2rgb(hsb.h, hsb.s,hsb.b);
     current_alpha = (alpha_rect.cursor.items[0].attr("cx") - rdim.x)/rdim.w;
+
+    var rgbstr = Raphael.format("rgba({0},{1},{2},", current_color.r, current_color.g, current_color.b);
+    alpha_rect.a.attr("fill", "180-"+rgbstr+"255)-"+rgbstr+"0)");
 
     if(input_target){
       var c = current_color.hex;
